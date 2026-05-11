@@ -197,6 +197,27 @@ namespace Wasmtime
         }
 
         /// <summary>
+        /// Sets the configuration to inherit host network access.
+        /// </summary>
+        /// <returns>Returns the current configuration.</returns>
+        public WasiConfiguration WithInheritedNetwork()
+        {
+            _inheritNetwork = true;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets whether IP name lookup is allowed for this configuration.
+        /// </summary>
+        /// <param name="enable">True to allow IP name lookup or false to disable it.</param>
+        /// <returns>Returns the current configuration.</returns>
+        public WasiConfiguration WithIpNameLookup(bool enable = true)
+        {
+            _allowIpNameLookup = enable;
+            return this;
+        }
+
+        /// <summary>
         /// Sets the configuration to use the given file path as stdin.
         /// </summary>
         /// <param name="path">The file to use as stdin.</param>
@@ -316,6 +337,7 @@ namespace Wasmtime
 
             SetConfigArgs(config);
             SetEnvironmentVariables(config);
+            SetNetwork(config);
             SetStandardIn(config);
             SetStandardOut(config);
             SetStandardError(config);
@@ -406,6 +428,19 @@ namespace Wasmtime
             }
         }
 
+        private void SetNetwork(Handle config)
+        {
+            if (_inheritNetwork)
+            {
+                Native.wasi_config_inherit_network(config);
+            }
+
+            if (_allowIpNameLookup.HasValue)
+            {
+                Native.wasi_config_allow_ip_name_lookup(config, _allowIpNameLookup.Value);
+            }
+        }
+
         private void SetStandardOut(Handle config)
         {
             if (_inheritStandardOutput)
@@ -485,6 +520,8 @@ namespace Wasmtime
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "IdentifierTypo")]
         private static class Native
         {
             [DllImport(Engine.LibraryName)]
@@ -495,7 +532,7 @@ namespace Wasmtime
 
             [DllImport(Engine.LibraryName)]
             [return: MarshalAs(UnmanagedType.I1)]
-            public unsafe static extern bool wasi_config_set_argv(Handle config, nuint argc, byte** argv);
+            public static extern unsafe bool wasi_config_set_argv(Handle config, nuint argc, byte** argv);
 
             [DllImport(Engine.LibraryName)]
             [return: MarshalAs(UnmanagedType.I1)]
@@ -508,6 +545,12 @@ namespace Wasmtime
 
             [DllImport(Engine.LibraryName)]
             public static extern void wasi_config_inherit_env(Handle config);
+
+            [DllImport(Engine.LibraryName)]
+            public static extern void wasi_config_inherit_network(Handle config);
+
+            [DllImport(Engine.LibraryName)]
+            public static extern void wasi_config_allow_ip_name_lookup(Handle config, [MarshalAs(UnmanagedType.I1)] bool enable);
 
             [DllImport(Engine.LibraryName)]
             [return: MarshalAs(UnmanagedType.I1)]
@@ -543,10 +586,10 @@ namespace Wasmtime
             [return: MarshalAs(UnmanagedType.I1)]
             public static extern bool wasi_config_preopen_dir(
                 Handle config,
-                [MarshalAs(Extensions.LPUTF8Str)] string path,
-                [MarshalAs(Extensions.LPUTF8Str)] string guestPath,
-                nuint dirPerms,
-                nuint filePerms
+                [MarshalAs(Extensions.LPUTF8Str)] string host_path,
+                [MarshalAs(Extensions.LPUTF8Str)] string guest_path,
+                nuint dir_perms,
+                nuint file_perms
             );
         }
 
@@ -558,6 +601,8 @@ namespace Wasmtime
         private readonly List<(string Path, string GuestPath, WasiDirectoryPermissions directoryPermissions, WasiFilePermissions filePermissions)> _preopenDirs = new List<(string, string, WasiDirectoryPermissions, WasiFilePermissions)>();
         private bool _inheritArgs = false;
         private bool _inheritEnv = false;
+        private bool _inheritNetwork = false;
+        private bool? _allowIpNameLookup;
         private bool _inheritStandardInput = false;
         private bool _inheritStandardOutput = false;
         private bool _inheritStandardError = false;

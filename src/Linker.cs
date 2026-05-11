@@ -13,8 +13,6 @@ namespace Wasmtime
     /// </summary>
     public partial class Linker : IDisposable
     {
-        private const int StackallocThreshold = 256;
-
         /// <summary>
         /// Constructs a new linker from the given engine.
         /// </summary>
@@ -61,8 +59,8 @@ namespace Wasmtime
 
             var ext = item.AsExtern();
 
-            using var nameBytes = name.ToUTF8(stackalloc byte[Math.Min(64, name.Length * 2)]);
-            using var moduleBytes = module.ToUTF8(stackalloc byte[Math.Min(64, module.Length * 2)]);
+            using var nameBytes = name.ToUTF8(stackalloc byte[name.GetUtf8StackallocSize()]);
+            using var moduleBytes = module.ToUTF8(stackalloc byte[module.GetUtf8StackallocSize()]);
 
             unsafe
             {
@@ -436,8 +434,8 @@ namespace Wasmtime
                     return Function.InvokeUntypedCallback(callback, callerPtr, args, (int)nargs, results, (int)nresults, resultKinds);
                 };
 
-                using var nameBytes = name.ToUTF8(stackalloc byte[Math.Min(64, name.Length * 2)]);
-                using var moduleBytes = module.ToUTF8(stackalloc byte[Math.Min(64, module.Length * 2)]);
+                using var nameBytes = name.ToUTF8(stackalloc byte[name.GetUtf8StackallocSize()]);
+                using var moduleBytes = module.ToUTF8(stackalloc byte[module.GetUtf8StackallocSize()]);
 
                 var funcType = Function.CreateFunctionType(parameterKinds, resultKinds);
                 try
@@ -473,8 +471,8 @@ namespace Wasmtime
         {
             unsafe
             {
-                using var moduleBytes = module.ToUTF8(stackalloc byte[Math.Min(64, module.Length * 2)]);
-                using var nameBytes = name.ToUTF8(stackalloc byte[Math.Min(64, name.Length * 2)]);
+                using var moduleBytes = module.ToUTF8(stackalloc byte[module.GetUtf8StackallocSize()]);
+                using var nameBytes = name.ToUTF8(stackalloc byte[name.GetUtf8StackallocSize()]);
 
                 fixed (byte* modulePtr = moduleBytes.Span, namePtr = nameBytes.Span)
                 {
@@ -498,6 +496,8 @@ namespace Wasmtime
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "IdentifierTypo")]
         internal static class Native
         {
             [DllImport(Engine.LibraryName)]
@@ -507,35 +507,35 @@ namespace Wasmtime
             public static extern void wasmtime_linker_delete(IntPtr linker);
 
             [DllImport(Engine.LibraryName)]
-            public static extern void wasmtime_linker_allow_shadowing(Handle linker, [MarshalAs(UnmanagedType.I1)] bool allow);
+            public static extern void wasmtime_linker_allow_shadowing(Handle linker, [MarshalAs(UnmanagedType.I1)] bool allow_shadowing);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern IntPtr wasmtime_linker_define(Handle linker, IntPtr context, byte* module, nuint moduleLen, byte* name, nuint nameLen, in Extern item);
+            public static extern unsafe IntPtr wasmtime_linker_define(Handle linker, IntPtr store, byte* module, nuint module_len, byte* name, nuint name_len, in Extern item);
 
             [DllImport(Engine.LibraryName)]
             public static extern IntPtr wasmtime_linker_define_wasi(Handle linker);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern IntPtr wasmtime_linker_define_instance(Handle linker, IntPtr context, byte* name, nuint len, in ExternInstance instance);
+            public static extern unsafe IntPtr wasmtime_linker_define_instance(Handle linker, IntPtr store, byte* name, nuint name_len, in ExternInstance instance);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern IntPtr wasmtime_linker_define_func(Handle linker, byte* module, nuint moduleLen, byte* name, nuint nameLen, IntPtr type, Function.Native.WasmtimeFuncCallback callback, IntPtr data, Function.Native.Finalizer? finalizer);
+            public static extern unsafe IntPtr wasmtime_linker_define_func(Handle linker, byte* module, nuint module_len, byte* name, nuint name_len, IntPtr ty, Function.Native.WasmtimeFuncCallback cb, IntPtr data, Function.Native.Finalizer? finalizer);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern IntPtr wasmtime_linker_define_func_unchecked(Handle linker, byte* module, nuint moduleLen, byte* name, nuint nameLen, IntPtr type, Function.Native.WasmtimeFuncUncheckedCallback callback, IntPtr data, Function.Native.Finalizer? finalizer);
+            public static extern unsafe IntPtr wasmtime_linker_define_func_unchecked(Handle linker, byte* module, nuint module_len, byte* name, nuint name_len, IntPtr ty, Function.Native.WasmtimeFuncUncheckedCallback cb, IntPtr data, Function.Native.Finalizer? finalizer);
 
             [DllImport(Engine.LibraryName)]
-            public static extern IntPtr wasmtime_linker_instantiate(Handle linker, IntPtr context, Module.Handle module, out ExternInstance instance, out IntPtr trap);
+            public static extern IntPtr wasmtime_linker_instantiate(Handle linker, IntPtr store, Module.Handle module, out ExternInstance instance, out IntPtr trap);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern IntPtr wasmtime_linker_module(Handle linker, IntPtr context, byte* name, nuint len, Module.Handle module);
+            public static extern unsafe IntPtr wasmtime_linker_module(Handle linker, IntPtr store, byte* name, nuint name_len, Module.Handle module);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern IntPtr wasmtime_linker_get_default(Handle linker, IntPtr context, byte* name, nuint len, out ExternFunc func);
+            public static extern unsafe IntPtr wasmtime_linker_get_default(Handle linker, IntPtr store, byte* name, nuint name_len, out ExternFunc func);
 
             [DllImport(Engine.LibraryName)]
             [return: MarshalAs(UnmanagedType.I1)]
-            public static unsafe extern bool wasmtime_linker_get(Handle linker, IntPtr context, byte* module, nuint moduleLen, byte* name, nuint nameLen, out Extern func);
+            public static extern unsafe bool wasmtime_linker_get(Handle linker, IntPtr store, byte* module, nuint module_len, byte* name, nuint name_len, out Extern item);
         }
 
         private readonly Handle handle;

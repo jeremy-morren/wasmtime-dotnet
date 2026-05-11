@@ -1,10 +1,3 @@
-using System;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using FluentAssertions;
-using Newtonsoft.Json.Linq;
-using Xunit;
-
 namespace Wasmtime.Tests
 {
     public class StoreDataFixture : ModuleFixture
@@ -104,7 +97,7 @@ namespace Wasmtime.Tests
         }
 
         [Fact]
-        unsafe public void ItCollectsExistingData()
+        public unsafe void ItCollectsExistingData()
         {
             var counter = 0;
 
@@ -136,7 +129,7 @@ namespace Wasmtime.Tests
         }
 
         [Fact]
-        unsafe public void ItCollectsExistingDataAfterSetData()
+        public unsafe void ItCollectsExistingDataAfterSetData()
         {
             var counter = 0;
 

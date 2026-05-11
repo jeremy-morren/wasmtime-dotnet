@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 namespace Wasmtime
 {
     [StructLayout(LayoutKind.Explicit)]
-    internal unsafe struct ValueRaw
+    internal struct ValueRaw
     {
         [FieldOffset(0)]
         public int i32;

@@ -10,6 +10,9 @@ namespace Wasmtime
     /// </summary>
     public class Instance
     {
+        private readonly Store _store;
+        internal readonly ExternInstance instance;
+
         /// <summary>
         /// Creates a new WebAssembly instance.
         /// </summary>
@@ -689,7 +692,7 @@ namespace Wasmtime
 
         private bool TryGetExtern(StoreContext context, string name, out Extern ext)
         {
-            using var nameBytes = name.ToUTF8(stackalloc byte[Math.Min(64, name.Length * 2)]);
+            using var nameBytes = name.ToUTF8(stackalloc byte[name.GetUtf8StackallocSize()]);
 
             unsafe
             {
@@ -711,6 +714,7 @@ namespace Wasmtime
             this.instance = instance;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "IdentifierTypo")]
         private static class Native
         {
             [DllImport(Engine.LibraryName)]
@@ -724,8 +728,5 @@ namespace Wasmtime
             [return: MarshalAs(UnmanagedType.I1)]
             public static extern unsafe bool wasmtime_instance_export_nth(IntPtr context, in ExternInstance instance, UIntPtr index, out byte* name, out UIntPtr len, out Extern ext);
         }
-
-        private readonly Store _store;
-        internal readonly ExternInstance instance;
     }
 }

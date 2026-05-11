@@ -3,8 +3,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Globalization" #>
 <#@ import namespace="System.Text" #>
-<#@ import namespace="System.Linq" #>
-<#@ output extension=".cs" encoding="us-ascii" #>
+<#@ output extension=".g.cs" encoding="us-ascii" #>
 <#@ include file="FunctionCallbackOverloadTemplates.t4" once="true" #>
 <#
 // Note: We specify ASCII as output encoding above to prevent different UTF-8 BOM behavior with VS and dotnet-t4.
@@ -14,6 +13,8 @@
 // when building the project.
 // Do not modify it directly.
 // </auto-generated>
+
+// ReSharper disable All
 
 #nullable enable
 
@@ -39,6 +40,7 @@ foreach (var (_, returnTypeCount, parameterCount, methodGenerics, delegateType, 
         /// Attempt to wrap this function as <#= returnTypeCount > 0 ? "a <c>Func</c>" : "an <c>Action</c>" #>. Wrapped <c><#= returnTypeCount > 0 ? "Func" : "Action" #></c> is faster than a normal Invoke call.
         /// </summary>
         /// <returns>A <c><#= returnTypeCount > 0 ? "Func" : "Action" #></c> to invoke this function, or <c>null</c> if the type signature is incompatible.</returns>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public <#= delegateType #>? Wrap<#= returnTypeCount > 0 ? "Func" : "Action" #><#= methodGenerics #>()
         {
             if (store is null || IsNull)

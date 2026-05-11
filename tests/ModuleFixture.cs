@@ -1,7 +1,3 @@
-using System;
-using System.IO;
-using Wasmtime;
-
 namespace Wasmtime.Tests
 {
     public abstract class ModuleFixture : IDisposable

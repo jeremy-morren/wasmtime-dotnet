@@ -1,8 +1,4 @@
-﻿using System;
-using FluentAssertions;
-using Xunit;
-
-namespace Wasmtime.Tests
+﻿namespace Wasmtime.Tests
 {
     public class CallExportFromImportFixture : ModuleFixture
     {

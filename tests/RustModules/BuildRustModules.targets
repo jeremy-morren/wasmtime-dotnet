@@ -1,0 +1,63 @@
+﻿<Project>
+    <ItemDefinitionGroup>
+        <RustModule Visible="false" />
+    </ItemDefinitionGroup>
+
+    <PropertyGroup>
+        <RustModulesTemp>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\obj\RustModules\'))</RustModulesTemp>
+        <RustModulesSrc>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\RustModules\'))</RustModulesSrc>
+    </PropertyGroup>
+
+    <Target Name="ResolveRustModules"
+            Condition="'@(RustModule)' != ''">
+
+        <ItemGroup>
+            <_RustModuleSource Include="@(RustModule)">
+                <SourceDir>$(RustModulesSrc)%(Identity))</SourceDir>
+                <ManifestPath>$(RustModulesSrc)%(Identity)\Cargo.toml</ManifestPath>
+                <TempDir>$(RustModulesTemp)%(Identity)</TempDir>
+                <Compiled>$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(OutputFile)</Compiled>
+                <OutputLink>RustModules/%(OutputFile)</OutputLink>
+            </_RustModuleSource>
+        </ItemGroup>
+    </Target>
+
+    <Target Name="BuildRustModules"
+            BeforeTargets="Build"
+            DependsOnTargets="ResolveRustModules"
+            Inputs="@(RustModule->'$(RustModulesSrc)%(Identity)\Cargo.toml')"
+            Outputs="@(RustModule->'$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(OutputFile)')"
+            Condition="'@(RustModule)' != ''">
+
+        <PropertyGroup>
+            <_CargoArgs>--target wasm32-wasip2 --release --lib --quiet</_CargoArgs>
+        </PropertyGroup>
+
+        <Message Importance="low"
+                 Text="Building Rust module: %(_RustModuleSource.SourceDir). TempDir: %(_RustModuleSource.TempDir)" />
+
+        <MakeDir Directories="%(_RustModuleSource.TempDir)" />
+
+        <Exec Command="cargo build $(_CargoArgs) --manifest-path &quot;%(_RustModuleSource.ManifestPath)&quot; --target-dir &quot;%(_RustModuleSource.TempDir)&quot;"
+              WorkingDirectory="%(_RustModuleSource.TempDir)"
+              ConsoleToMSBuild="true"
+              UseUtf8Encoding="true"
+              StandardOutputImportance="low" />
+
+        <Error Condition="!Exists('%(_RustModuleSource.Compiled)')"
+               Text="Expected Rust module output was not produced: %(_RustModuleSource.Compiled)" />
+    </Target>
+
+    <Target Name="IncludeRustModulesAsContent"
+            DependsOnTargets="ResolveRustModules;BuildRustModules"
+            BeforeTargets="GetCopyToOutputDirectoryItems"
+            Condition="'$(TargetFramework)' != ''">
+
+        <ItemGroup>
+            <ContentWithTargetPath Include="%(_RustModuleSource.Compiled)"
+                                   TargetPath="%(_RustModuleSource.OutputLink)"
+                                   CopyToOutputDirectory="Always"
+                                   Visible="false" />
+        </ItemGroup>
+    </Target>
+</Project>

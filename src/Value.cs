@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace Wasmtime
@@ -103,8 +104,10 @@ namespace Wasmtime
                 case ValueKind.Int64:
                 case ValueKind.Float32:
                 case ValueKind.Float64:
-                case ValueKind.V128:
                     return Native.wasm_valtype_new((byte)kind);
+
+                case ValueKind.V128:
+                    return Native.wasmtime_wasm_valtype_v128();
 
                 case ValueKind.ExternRef:
                     return Native.wasm_valtype_new(128);
@@ -119,35 +122,100 @@ namespace Wasmtime
 
         public static ValueKind ToKind(IntPtr type)
         {
-            var kind = (ValueKind)Native.wasm_valtype_kind(type);
-            switch (kind)
+            Native.wasmtime_valtype_new(type, out var valueType);
+
+            try
             {
-                case ValueKind.Int32:
-                case ValueKind.Int64:
-                case ValueKind.Float32:
-                case ValueKind.Float64:
-                case ValueKind.V128:
-                    return kind;
+                switch (valueType.kind)
+                {
+                    case Native.WASMTIME_VALTYPE_KIND_I32:
+                        return ValueKind.Int32;
 
-                case (ValueKind)128:
-                    return ValueKind.ExternRef;
+                    case Native.WASMTIME_VALTYPE_KIND_I64:
+                        return ValueKind.Int64;
 
-                case (ValueKind)129:
-                    return ValueKind.FuncRef;
+                    case Native.WASMTIME_VALTYPE_KIND_F32:
+                        return ValueKind.Float32;
 
-                default:
-                    throw new ArgumentException("unsupported value kind");
+                    case Native.WASMTIME_VALTYPE_KIND_F64:
+                        return ValueKind.Float64;
+
+                    case Native.WASMTIME_VALTYPE_KIND_V128:
+                        return ValueKind.V128;
+
+                    case Native.WASMTIME_VALTYPE_KIND_REF:
+                        switch (valueType.reftype.heaptype.kind)
+                        {
+                            case Native.WASMTIME_HEAPTYPE_KIND_EXTERN:
+                                return ValueKind.ExternRef;
+
+                            case Native.WASMTIME_HEAPTYPE_KIND_FUNC:
+                                return ValueKind.FuncRef;
+                        }
+
+                        break;
+                }
+
+                throw new ArgumentException("unsupported value kind");
+            }
+            finally
+            {
+                Native.wasmtime_valtype_delete(ref valueType);
             }
         }
 
         private static class Native
         {
+            public const byte WASMTIME_HEAPTYPE_KIND_EXTERN = 0;
+            public const byte WASMTIME_HEAPTYPE_KIND_FUNC = 2;
+
+            public const byte WASMTIME_VALTYPE_KIND_I32 = 0;
+            public const byte WASMTIME_VALTYPE_KIND_I64 = 1;
+            public const byte WASMTIME_VALTYPE_KIND_F32 = 2;
+            public const byte WASMTIME_VALTYPE_KIND_F64 = 3;
+            public const byte WASMTIME_VALTYPE_KIND_V128 = 4;
+            public const byte WASMTIME_VALTYPE_KIND_REF = 5;
+
             [DllImport(Engine.LibraryName)]
             public static extern IntPtr wasm_valtype_new(byte kind);
 
             [DllImport(Engine.LibraryName)]
-            [return: MarshalAs(UnmanagedType.I1)]
-            public static extern byte wasm_valtype_kind(IntPtr valueType);
+            public static extern IntPtr wasmtime_wasm_valtype_v128();
+
+            [DllImport(Engine.LibraryName)]
+            public static extern void wasmtime_valtype_new(IntPtr type, out WasmtimeValueType result);
+
+            [DllImport(Engine.LibraryName)]
+            public static extern void wasmtime_valtype_delete(ref WasmtimeValueType type);
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct WasmtimeValueType
+            {
+                public byte kind;
+                public WasmtimeReferenceType reftype;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct WasmtimeReferenceType
+            {
+                [MarshalAs(UnmanagedType.I1)]
+                public bool nullable;
+                public WasmtimeHeapType heaptype;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct WasmtimeHeapType
+            {
+                public byte kind;
+                public WasmtimeHeapTypeUnion of;
+            }
+
+            [StructLayout(LayoutKind.Explicit)]
+            public struct WasmtimeHeapTypeUnion
+            {
+                [FieldOffset(0)]
+                public IntPtr concreteType;
+            }
         }
     }
 
@@ -215,6 +283,19 @@ namespace Wasmtime
     [StructLayout(LayoutKind.Sequential)]
     internal struct Value
     {
+        static Value()
+        {
+            Debug.Assert(
+                Marshal.SizeOf<Value>() == Marshal.OffsetOf<Value>(nameof(of)).ToInt32() + Marshal.SizeOf<ValueUnion>(),
+                $"Marshal.SizeOf<Value>() == {Marshal.OffsetOf<Value>(nameof(of)).ToInt32() + Marshal.SizeOf<ValueUnion>()}");
+            Debug.Assert(
+                Marshal.OffsetOf<Value>(nameof(kind)).ToInt32() == 0,
+                "Marshal.OffsetOf<Value>(nameof(kind)).ToInt32() == 0");
+            Debug.Assert(
+                Marshal.OffsetOf<Value>(nameof(of)).ToInt32() == sizeof(ulong),
+                $"Marshal.OffsetOf<Value>(nameof(of)).ToInt32() == {sizeof(ulong)}");
+        }
+
         public void Release(Store store)
         {
             Native.wasmtime_val_unroot(store.Context.handle, this);
@@ -498,6 +579,11 @@ namespace Wasmtime
     [StructLayout(LayoutKind.Explicit)]
     internal unsafe struct ValueUnion
     {
+        static ValueUnion()
+        {
+            Debug.Assert(Marshal.SizeOf<ValueUnion>() == sizeof(V128));
+        }
+
         [FieldOffset(0)]
         public int i32;
 
@@ -526,20 +612,42 @@ namespace Wasmtime
     [StructLayout(LayoutKind.Sequential)]
     internal struct AnyRef
     {
+        static unsafe AnyRef()
+        {
+            Debug.Assert(Marshal.SizeOf<AnyRef>() == sizeof(ulong) + (2 * sizeof(uint)) + sizeof(IntPtr));
+            Debug.Assert(Marshal.OffsetOf<AnyRef>(nameof(store)).ToInt32() == 0);
+            Debug.Assert(Marshal.OffsetOf<AnyRef>(nameof(__private1)).ToInt32() == sizeof(ulong));
+            Debug.Assert(Marshal.OffsetOf<AnyRef>(nameof(__private2)).ToInt32() == sizeof(ulong) + sizeof(uint));
+            Debug.Assert(Marshal.OffsetOf<AnyRef>(nameof(__private3)).ToInt32() == sizeof(ulong) + (2 * sizeof(uint)));
+        }
+
         public ulong store;
 
         private uint __private1;
 
         private uint __private2;
+
+        private IntPtr __private3;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct ExternRef
     {
+        static unsafe ExternRef()
+        {
+            Debug.Assert(Marshal.SizeOf<ExternRef>() == sizeof(ulong) + (2 * sizeof(uint)) + sizeof(IntPtr));
+            Debug.Assert(Marshal.OffsetOf<ExternRef>(nameof(store)).ToInt32() == 0);
+            Debug.Assert(Marshal.OffsetOf<ExternRef>(nameof(__private1)).ToInt32() == sizeof(ulong));
+            Debug.Assert(Marshal.OffsetOf<ExternRef>(nameof(__private2)).ToInt32() == sizeof(ulong) + sizeof(uint));
+            Debug.Assert(Marshal.OffsetOf<ExternRef>(nameof(__private3)).ToInt32() == sizeof(ulong) + (2 * sizeof(uint)));
+        }
+
         public ulong store;
 
         private uint __private1;
 
         private uint __private2;
+
+        private IntPtr __private3;
     }
 }

@@ -1,0 +1,13 @@
+[package]
+name = "cli_echo"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wit-bindgen = "0.57.1"
+wasi = "=0.13.1"
+
+[lib]
+path = "cli-echo.rs"
+crate-type = ["cdylib"]
+

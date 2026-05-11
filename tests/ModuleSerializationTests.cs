@@ -1,8 +1,3 @@
-using System;
-using System.IO;
-using FluentAssertions;
-using Xunit;
-
 namespace Wasmtime.Tests
 {
     public class ModuleSerializationTests

@@ -1,5 +1,5 @@
 ﻿<#
-// This file contains the functions used in Function.FromCallback.ts and Linker.DefineFunction.ts
+// This file contains the functions used in Function.FromCallback.g.cs and Linker.DefineFunction.g.cs
 // in order to generate overloads with different parameter and result types for Action<...>/Func<...>.
 
 // Suppress the "not used" warning when this file is referenced but the function is not called.

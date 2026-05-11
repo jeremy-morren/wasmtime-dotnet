@@ -1,7 +1,4 @@
-using System;
 using System.Reflection;
-using FluentAssertions;
-using Xunit;
 
 namespace Wasmtime.Tests
 {
@@ -49,6 +46,17 @@ namespace Wasmtime.Tests
             // so the following statement should complete without throwing
             // `ObjectDisposedException`
             stream.ReadExactly(new byte[0], 0, 0);
+        }
+
+        [Fact]
+        public void ItConvertsWatToWasmBytes()
+        {
+            byte[] bytes = Module.Wat2Wasm("(module (func (export \"run\")))");
+
+            bytes.Should().NotBeEmpty();
+
+            using var engine = new Engine();
+            Module.Validate(engine, bytes).Should().BeNull();
         }
 
         [Fact]

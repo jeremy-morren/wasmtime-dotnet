@@ -3,6 +3,8 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
+// ReSharper disable InconsistentNaming
+
 namespace Wasmtime
 {
     internal static class Extensions
@@ -14,10 +16,28 @@ namespace Wasmtime
             UnmanagedType.LPUTF8Str;
 #endif
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ThrowIfNegative(int value, string paramName)
+        {
+    #if !NET8_0_OR_GREATER
+            if (value < 0)
+            {
+                throw new ArgumentOutOfRangeException(paramName);
+            }
+    #else
+            ArgumentOutOfRangeException.ThrowIfNegative(value, paramName);
+    #endif
+        }
+
 #if NETSTANDARD2_0
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe string GetString(this Encoding encoding, Span<byte> bytes)
         {
+            if (bytes.Length == 0)
+            {
+                return string.Empty;
+            }
+
             fixed (byte* bytesPtr = bytes)
             {
                 return encoding.GetString(bytesPtr, bytes.Length);
@@ -27,6 +47,11 @@ namespace Wasmtime
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe string GetString(this Encoding encoding, ReadOnlySpan<byte> bytes)
         {
+            if (bytes.Length == 0)
+            {
+                return string.Empty;
+            }
+
             fixed (byte* bytesPtr = bytes)
             {
                 return encoding.GetString(bytesPtr, bytes.Length);
@@ -36,6 +61,11 @@ namespace Wasmtime
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe int GetBytes(this Encoding encoding, Span<char> chars, Span<byte> bytes)
         {
+            if (chars.Length == 0)
+            {
+                return 0;
+            }
+
             fixed (char* charsPtr = chars)
             fixed (byte* bytesPtr = bytes)
             {
@@ -46,6 +76,11 @@ namespace Wasmtime
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe int GetBytes(this Encoding encoding, ReadOnlySpan<char> chars, Span<byte> bytes)
         {
+            if (chars.Length == 0)
+            {
+                return 0;
+            }
+
             fixed (char* charsPtr = chars)
             fixed (byte* bytesPtr = bytes)
             {
@@ -56,6 +91,11 @@ namespace Wasmtime
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe int GetBytes(this Encoding encoding, string chars, Span<byte> bytes)
         {
+            if (chars.Length == 0)
+            {
+                return 0;
+            }
+
             fixed (char* charsPtr = chars)
             fixed (byte* bytesPtr = bytes)
             {
@@ -68,7 +108,8 @@ namespace Wasmtime
         public static bool IsTupleType(this Type type)
         {
 #if NETSTANDARD2_0
-            return type.FullName.StartsWith("System.ValueTuple`");
+            return type.FullName?.StartsWith("System.ValueTuple`", StringComparison.Ordinal) == true
+            || type.FullName?.StartsWith("System.Tuple`", StringComparison.Ordinal) == true;
 #else
             return typeof(ITuple).IsAssignableFrom(type);
 #endif

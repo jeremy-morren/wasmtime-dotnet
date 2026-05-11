@@ -72,3 +72,15 @@ $ dotnet run
 ```
 
 This should print `Hello from C#!`.
+
+## Managed Component Worlds
+
+The component model APIs in `Wasmtime.Components` can also be used to build fully managed host
+implementations for imported interface worlds.
+
+The core public building blocks are:
+
+- `ComponentLinker.GetRoot()` and `ComponentLinkerInstance.AddInstance(...)` for defining imported instances
+- `ComponentLinkerInstance.AddFunction(...)` for defining imported functions
+- `ComponentLinkerInstance.AddResource(...)`, `AddResourceMethod(...)`, `AddResourceStatic(...)`, and `AddResourceConstructor(...)` for defining resource-based interfaces
+- `ComponentResourceRegistry` for store-bound resource tracking, parent-child lifetimes, and resource destructors

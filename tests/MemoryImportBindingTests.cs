@@ -1,7 +1,3 @@
-using System;
-using FluentAssertions;
-using Xunit;
-
 namespace Wasmtime.Tests
 {
     public class MemoryImportBindingFixture : ModuleFixture
@@ -43,7 +39,8 @@ namespace Wasmtime.Tests
             action
                .Should()
                .Throw<ArgumentNullException>()
-               .WithMessage("Value cannot be null. (Parameter 'store')");
+                    .WithParameterName("store")
+                    .WithMessage("Value cannot be null*");
         }
 
         [Fact]
@@ -67,7 +64,8 @@ namespace Wasmtime.Tests
             action
                .Should()
                .Throw<ArgumentOutOfRangeException>()
-               .WithMessage("Specified argument was out of the range of valid values. (Parameter 'minimum')");
+                    .WithParameterName("minimum")
+                    .WithMessage("Specified argument was out of the range of valid values*");
         }
 
         [Fact]
@@ -78,7 +76,8 @@ namespace Wasmtime.Tests
             action
                .Should()
                .Throw<ArgumentOutOfRangeException>()
-               .WithMessage("Specified argument was out of the range of valid values. (Parameter 'maximum')");
+                    .WithParameterName("maximum")
+                    .WithMessage("Specified argument was out of the range of valid values*");
         }
 
         [Fact]
@@ -89,7 +88,8 @@ namespace Wasmtime.Tests
             action
                .Should()
                .Throw<ArgumentException>()
-               .WithMessage("The maximum cannot be less than the minimum. (Parameter 'maximum')");
+                    .WithParameterName("maximum")
+                    .WithMessage("The maximum cannot be less than the minimum*");
         }
 
         [Fact]

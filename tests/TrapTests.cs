@@ -1,8 +1,3 @@
-using System;
-
-using FluentAssertions;
-using Xunit;
-
 namespace Wasmtime.Tests
 {
     public class TrapFixture : ModuleFixture

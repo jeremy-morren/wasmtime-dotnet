@@ -1,8 +1,3 @@
-using FluentAssertions;
-using System;
-using System.Linq;
-using Xunit;
-
 namespace Wasmtime.Tests
 {
     public class LinkerFunctionsFixture : ModuleFixture

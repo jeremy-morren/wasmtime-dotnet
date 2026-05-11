@@ -1,9 +1,4 @@
-﻿using System;
-using FluentAssertions;
-using System.IO;
-using Xunit;
-
-namespace Wasmtime.Tests
+﻿namespace Wasmtime.Tests
 {
     public class StoreTests
         : StoreFixture

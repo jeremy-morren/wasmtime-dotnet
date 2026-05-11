@@ -1,6 +1,5 @@
 using System;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace Wasmtime
 {
@@ -48,7 +47,7 @@ namespace Wasmtime
         public bool TryGetMemorySpan<T>(string name, long address, int length, out Span<T> result)
             where T : unmanaged
         {
-            using var nameBytes = name.ToUTF8(stackalloc byte[Math.Min(64, name.Length * 2)]);
+            using var nameBytes = name.ToUTF8(stackalloc byte[name.GetUtf8StackallocSize()]);
 
             unsafe
             {
@@ -82,7 +81,7 @@ namespace Wasmtime
         {
             unsafe
             {
-                using var bytes = name.ToUTF8(stackalloc byte[Math.Min(64, name.Length * 2)]);
+                using var bytes = name.ToUTF8(stackalloc byte[name.GetUtf8StackallocSize()]);
 
                 fixed (byte* ptr = bytes.Span)
                 {
@@ -111,7 +110,7 @@ namespace Wasmtime
         {
             unsafe
             {
-                using var bytes = name.ToUTF8(stackalloc byte[Math.Min(64, name.Length * 2)]);
+                using var bytes = name.ToUTF8(stackalloc byte[name.GetUtf8StackallocSize()]);
 
                 fixed (byte* ptr = bytes.Span)
                 {
@@ -166,11 +165,13 @@ namespace Wasmtime
         /// </summary>
         public void SetData(object? data) => store.SetData(data);
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "IdentifierTypo")]
         internal static class Native
         {
             [DllImport(Engine.LibraryName)]
             [return: MarshalAs(UnmanagedType.I1)]
-            public static extern unsafe bool wasmtime_caller_export_get(IntPtr caller, byte* name, UIntPtr len, out Extern item);
+            public static extern unsafe bool wasmtime_caller_export_get(IntPtr caller, byte* name, UIntPtr name_len, out Extern item);
 
             [DllImport(Engine.LibraryName)]
             public static extern IntPtr wasmtime_caller_context(IntPtr caller);

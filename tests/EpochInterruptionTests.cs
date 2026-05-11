@@ -1,8 +1,3 @@
-using System;
-using System.Threading;
-using FluentAssertions;
-using Xunit;
-
 namespace Wasmtime.Tests;
 
 public class EpochInterruptionFixture : ModuleFixture

@@ -3,8 +3,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Globalization" #>
 <#@ import namespace="System.Text" #>
-<#@ import namespace="System.Linq" #>
-<#@ output extension=".cs" encoding="us-ascii" #>
+<#@ output extension=".g.cs" encoding="us-ascii" #>
 <#@ include file="FunctionCallbackOverloadTemplates.t4" once="true" #>
 <#
 // Note: We specify ASCII as output encoding above to prevent different UTF-8 BOM behavior with VS and dotnet-t4.
@@ -14,6 +13,8 @@
 // when building the project.
 // Do not modify it directly.
 // </auto-generated>
+
+// ReSharper disable All
 
 #nullable enable
 
@@ -44,6 +45,7 @@ foreach (var (hasCaller, resultCount, parameterCount, methodGenerics, delegateTy
         /// <param name="module">The module name of the function.</param>
         /// <param name="name">The name of the function.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public void DefineFunction<#= methodGenerics #>(string module, string name, <#= delegateType #> callback)
         {
             if (module is null)

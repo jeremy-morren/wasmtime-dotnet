@@ -1,33 +1,60 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <!-- netcoreapp2.2 to test .NET Standard 2.0, netcoreapp3.0 for .NET Standard 2.1, net9.0 for .NET 9 -->
+    <TargetFrameworks>netcoreapp2.2;netcoreapp3.0;net9.0</TargetFrameworks>
+
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>10</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <TestTfmsInParallel>false</TestTfmsInParallel>
+
+    <!-- Disable vulnerability warnings in test projects -->
+    <NoWarn>$(NoWarn);NU1902;NU1903</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\Wasmtime.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.12.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
-    <PackageReference Include="xunit" Version="2.8.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.1" />
-    <PackageReference Include="coverlet.collector" Version="6.0.2">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.3" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+    <PackageReference Include="coverlet.collector" Version="6.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 
+  <!-- Include net48 target framework for Windows to test .NET Framework 4.8 support -->
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+    <TargetFrameworks>net48;$(TargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
+    <PackageReference Include="System.Text.Json" Version="5.0.2"  />
+  </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\src\Wasmtime.csproj" />
+    <Using Include="Xunit" />
+    <Using Include="FluentAssertions" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="Modules/*.wat" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="Modules/*.wasm" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="Modules/*.wit" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="Modules/hello.wat" LogicalName="hello.wat" />
     <EmbeddedResource Include="Modules/hello.wasm" LogicalName="hello.wasm" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
+  <Import Project="RustModules/BuildRustModules.targets" />
 
+  <ItemGroup>
+    <RustModule Include="CliEcho" OutputFile="cli_echo.wasm"/>
+  </ItemGroup>
 </Project>

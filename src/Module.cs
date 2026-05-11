@@ -167,6 +167,37 @@ namespace Wasmtime
         }
 
         /// <summary>
+        /// Converts a WebAssembly text format representation to binary format.
+        /// </summary>
+        /// <param name="text">The WebAssembly text format representation.</param>
+        /// <returns>Returns the converted WebAssembly binary.</returns>
+        public static byte[] Wat2Wasm(string text)
+        {
+            if (text is null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
+            unsafe
+            {
+                var textBytes = Encoding.UTF8.GetBytes(text);
+                fixed (byte* ptr = textBytes)
+                {
+                    var error = Native.wasmtime_wat2wasm(ptr, (nuint)textBytes.Length, out var moduleBytes);
+                    if (error != IntPtr.Zero)
+                    {
+                        throw WasmtimeException.FromOwnedError(error);
+                    }
+
+                    using (moduleBytes)
+                    {
+                        return moduleBytes.ToArray();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Creates a <see cref="Module"/> based on a WebAssembly text format representation.
         /// </summary>
         /// <param name="engine">The engine to use for the module.</param>
@@ -190,23 +221,7 @@ namespace Wasmtime
                 throw new ArgumentNullException(nameof(text));
             }
 
-            unsafe
-            {
-                var textBytes = Encoding.UTF8.GetBytes(text);
-                fixed (byte* ptr = textBytes)
-                {
-                    var error = Native.wasmtime_wat2wasm(ptr, (nuint)textBytes.Length, out var moduleBytes);
-                    if (error != IntPtr.Zero)
-                    {
-                        throw WasmtimeException.FromOwnedError(error);
-                    }
-
-                    using (var array = moduleBytes)
-                    {
-                        return FromBytes(engine, name, new ReadOnlySpan<byte>(array.data, checked((int)array.size)));
-                    }
-                }
-            }
+            return FromBytes(engine, name, Wat2Wasm(text));
         }
 
         /// <summary>
@@ -420,10 +435,12 @@ namespace Wasmtime
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "IdentifierTypo")]
         internal static class Native
         {
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern IntPtr wasmtime_module_new(Engine.Handle engine, byte* bytes, UIntPtr size, out IntPtr handle);
+            public static extern unsafe IntPtr wasmtime_module_new(Engine.Handle engine, byte* bytes, UIntPtr size, out IntPtr handle);
 
             [DllImport(Engine.LibraryName)]
             public static extern void wasmtime_module_delete(IntPtr module);
@@ -435,7 +452,7 @@ namespace Wasmtime
             public static extern void wasmtime_module_exports(IntPtr module, out ExportTypeArray exports);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern IntPtr wasmtime_wat2wasm(byte* text, nuint len, out ByteArray bytes);
+            public static extern unsafe IntPtr wasmtime_wat2wasm(byte* text, nuint len, out ByteArray bytes);
 
             [DllImport(Engine.LibraryName)]
             public static extern unsafe IntPtr wasmtime_module_validate(Engine.Handle engine, byte* bytes, UIntPtr size);

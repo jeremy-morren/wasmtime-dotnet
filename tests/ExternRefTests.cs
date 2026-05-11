@@ -1,7 +1,3 @@
-using System;
-using FluentAssertions;
-using Xunit;
-
 namespace Wasmtime.Tests
 {
     public class ExternRefFixture : ModuleFixture
@@ -100,7 +96,7 @@ namespace Wasmtime.Tests
         }
 
         [Fact]
-        unsafe public void ItCollectsExternRefs()
+        public unsafe void ItCollectsExternRefs()
         {
             var counter = 0;
 

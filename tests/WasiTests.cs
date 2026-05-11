@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using FluentAssertions;
-using Xunit;
+using System.Runtime.InteropServices;
 
 namespace Wasmtime.Tests
 {
@@ -91,14 +86,14 @@ namespace Wasmtime.Tests
 
             store.SetWasiConfiguration(config);
             var instance = linker.Instantiate(store, module);
-
             var memory = instance.GetMemory("memory");
             memory.Should().NotBeNull();
             var call_environ_sizes_get = instance.GetFunction("call_environ_sizes_get");
             call_environ_sizes_get.Should().NotBeNull();
 
             Assert.Equal(0, call_environ_sizes_get.Invoke(0, 4));
-            Assert.Equal(Environment.GetEnvironmentVariables().Keys.Count, memory.ReadInt32(0));
+
+            Assert.Equal(GetInheritedEnvironmentEntryCount(), memory.ReadInt32(0));
         }
 
         [Theory]
@@ -336,5 +331,70 @@ namespace Wasmtime.Tests
             Assert.Equal(0, call_fd_close.Invoke(fileFd));
             Assert.Equal(MESSAGE, File.ReadAllText(file.Path));
         }
+
+        [Fact]
+        public void ItConfiguresNetworkAndIpNameLookup()
+        {
+            using var engine = new Engine();
+            using var store = new Store(engine);
+
+            var config = new WasiConfiguration()
+                .WithInheritedNetwork()
+                .WithIpNameLookup();
+
+            store.SetWasiConfiguration(config);
+        }
+        
+#if NET47_OR_GREATER
+
+        // See https://github.com/microsoft/vstest/issues/15740
+         
+        private static int GetInheritedEnvironmentEntryCount()
+        {
+            var environmentBlock = Native.GetEnvironmentStringsW();
+            if (environmentBlock == IntPtr.Zero)
+            {
+                throw new InvalidOperationException("GetEnvironmentStringsW returned a null pointer.");
+            }
+
+            try
+            {
+                var count = 0;
+                var offset = 0;
+
+                while (true)
+                {
+                    var rawEntry = Marshal.PtrToStringUni(IntPtr.Add(environmentBlock, offset));
+                    if (string.IsNullOrEmpty(rawEntry))
+                    {
+                        return count;
+                    }
+
+                    count++;
+                    offset += (rawEntry.Length + 1) * sizeof(char);
+                }
+            }
+            finally
+            {
+                Native.FreeEnvironmentStringsW(environmentBlock);
+            }
+        }
+
+        private static class Native
+        {
+            [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+            public static extern IntPtr GetEnvironmentStringsW();
+
+            [DllImport("kernel32.dll")]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool FreeEnvironmentStringsW(IntPtr lpszEnvironmentBlock);
+        }
+#else
+        private static int GetInheritedEnvironmentEntryCount()
+        {
+            return Environment.GetEnvironmentVariables().Keys.Count;
+        }
+#endif
     }
+    
 }

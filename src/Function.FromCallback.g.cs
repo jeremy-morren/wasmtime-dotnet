@@ -4,6 +4,8 @@
 // Do not modify it directly.
 // </auto-generated>
 
+// ReSharper disable All
+
 #nullable enable
 
 using System;
@@ -19,6 +21,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback(Store store, Action callback)
         {
             if (store is null)
@@ -80,6 +83,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T>(Store store, Action<T?> callback)
         {
             if (store is null)
@@ -142,6 +146,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2>(Store store, Action<T1?, T2?> callback)
         {
             if (store is null)
@@ -206,6 +211,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3>(Store store, Action<T1?, T2?, T3?> callback)
         {
             if (store is null)
@@ -272,6 +278,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4>(Store store, Action<T1?, T2?, T3?, T4?> callback)
         {
             if (store is null)
@@ -340,6 +347,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5>(Store store, Action<T1?, T2?, T3?, T4?, T5?> callback)
         {
             if (store is null)
@@ -410,6 +418,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6>(Store store, Action<T1?, T2?, T3?, T4?, T5?, T6?> callback)
         {
             if (store is null)
@@ -482,6 +491,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7>(Store store, Action<T1?, T2?, T3?, T4?, T5?, T6?, T7?> callback)
         {
             if (store is null)
@@ -556,6 +566,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8>(Store store, Action<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> callback)
         {
             if (store is null)
@@ -632,6 +643,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Store store, Action<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> callback)
         {
             if (store is null)
@@ -710,6 +722,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Store store, Action<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?> callback)
         {
             if (store is null)
@@ -790,6 +803,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Store store, Action<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?> callback)
         {
             if (store is null)
@@ -872,6 +886,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Store store, Action<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, T12?> callback)
         {
             if (store is null)
@@ -956,6 +971,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<TResult>(Store store, Func<TResult> callback)
         {
             if (store is null)
@@ -1019,6 +1035,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T, TResult>(Store store, Func<T?, TResult> callback)
         {
             if (store is null)
@@ -1083,6 +1100,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, TResult>(Store store, Func<T1?, T2?, TResult> callback)
         {
             if (store is null)
@@ -1149,6 +1167,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, TResult>(Store store, Func<T1?, T2?, T3?, TResult> callback)
         {
             if (store is null)
@@ -1217,6 +1236,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, TResult>(Store store, Func<T1?, T2?, T3?, T4?, TResult> callback)
         {
             if (store is null)
@@ -1287,6 +1307,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, TResult>(Store store, Func<T1?, T2?, T3?, T4?, T5?, TResult> callback)
         {
             if (store is null)
@@ -1359,6 +1380,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, TResult>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, TResult> callback)
         {
             if (store is null)
@@ -1433,6 +1455,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, TResult>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, TResult> callback)
         {
             if (store is null)
@@ -1509,6 +1532,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, TResult> callback)
         {
             if (store is null)
@@ -1587,6 +1611,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, TResult> callback)
         {
             if (store is null)
@@ -1667,6 +1692,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, TResult> callback)
         {
             if (store is null)
@@ -1749,6 +1775,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, TResult> callback)
         {
             if (store is null)
@@ -1833,6 +1860,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, T12?, TResult> callback)
         {
             if (store is null)
@@ -1919,6 +1947,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<TResult1, TResult2>(Store store, Func<ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -1984,6 +2013,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T, TResult1, TResult2>(Store store, Func<T?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -2050,6 +2080,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, TResult1, TResult2>(Store store, Func<T1?, T2?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -2118,6 +2149,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, TResult1, TResult2>(Store store, Func<T1?, T2?, T3?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -2188,6 +2220,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, TResult1, TResult2>(Store store, Func<T1?, T2?, T3?, T4?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -2260,6 +2293,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, TResult1, TResult2>(Store store, Func<T1?, T2?, T3?, T4?, T5?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -2334,6 +2368,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, TResult1, TResult2>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -2410,6 +2445,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, TResult1, TResult2>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -2488,6 +2524,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, TResult1, TResult2>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -2568,6 +2605,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult1, TResult2>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -2650,6 +2688,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult1, TResult2>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -2734,6 +2773,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult1, TResult2>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -2820,6 +2860,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult1, TResult2>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, T12?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -2908,6 +2949,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<TResult1, TResult2, TResult3>(Store store, Func<ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -2975,6 +3017,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T, TResult1, TResult2, TResult3>(Store store, Func<T?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -3043,6 +3086,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, TResult1, TResult2, TResult3>(Store store, Func<T1?, T2?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -3113,6 +3157,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, TResult1, TResult2, TResult3>(Store store, Func<T1?, T2?, T3?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -3185,6 +3230,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, TResult1, TResult2, TResult3>(Store store, Func<T1?, T2?, T3?, T4?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -3259,6 +3305,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, TResult1, TResult2, TResult3>(Store store, Func<T1?, T2?, T3?, T4?, T5?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -3335,6 +3382,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, TResult1, TResult2, TResult3>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -3413,6 +3461,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, TResult1, TResult2, TResult3>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -3493,6 +3542,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, TResult1, TResult2, TResult3>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -3575,6 +3625,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult1, TResult2, TResult3>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -3659,6 +3710,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult1, TResult2, TResult3>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -3745,6 +3797,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult1, TResult2, TResult3>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -3833,6 +3886,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult1, TResult2, TResult3>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, T12?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -3923,6 +3977,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<TResult1, TResult2, TResult3, TResult4>(Store store, Func<ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -3992,6 +4047,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T, TResult1, TResult2, TResult3, TResult4>(Store store, Func<T?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -4062,6 +4118,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, TResult1, TResult2, TResult3, TResult4>(Store store, Func<T1?, T2?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -4134,6 +4191,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, TResult1, TResult2, TResult3, TResult4>(Store store, Func<T1?, T2?, T3?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -4208,6 +4266,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, TResult1, TResult2, TResult3, TResult4>(Store store, Func<T1?, T2?, T3?, T4?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -4284,6 +4343,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, TResult1, TResult2, TResult3, TResult4>(Store store, Func<T1?, T2?, T3?, T4?, T5?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -4362,6 +4422,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, TResult1, TResult2, TResult3, TResult4>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -4442,6 +4503,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, TResult1, TResult2, TResult3, TResult4>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -4524,6 +4586,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, TResult1, TResult2, TResult3, TResult4>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -4608,6 +4671,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult1, TResult2, TResult3, TResult4>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -4694,6 +4758,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult1, TResult2, TResult3, TResult4>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -4782,6 +4847,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult1, TResult2, TResult3, TResult4>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -4872,6 +4938,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult1, TResult2, TResult3, TResult4>(Store store, Func<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, T12?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -4964,6 +5031,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback(Store store, CallerAction callback)
         {
             if (store is null)
@@ -5028,6 +5096,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T>(Store store, CallerAction<T?> callback)
         {
             if (store is null)
@@ -5094,6 +5163,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2>(Store store, CallerAction<T1?, T2?> callback)
         {
             if (store is null)
@@ -5162,6 +5232,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3>(Store store, CallerAction<T1?, T2?, T3?> callback)
         {
             if (store is null)
@@ -5232,6 +5303,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4>(Store store, CallerAction<T1?, T2?, T3?, T4?> callback)
         {
             if (store is null)
@@ -5304,6 +5376,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5>(Store store, CallerAction<T1?, T2?, T3?, T4?, T5?> callback)
         {
             if (store is null)
@@ -5378,6 +5451,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6>(Store store, CallerAction<T1?, T2?, T3?, T4?, T5?, T6?> callback)
         {
             if (store is null)
@@ -5454,6 +5528,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7>(Store store, CallerAction<T1?, T2?, T3?, T4?, T5?, T6?, T7?> callback)
         {
             if (store is null)
@@ -5532,6 +5607,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8>(Store store, CallerAction<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> callback)
         {
             if (store is null)
@@ -5612,6 +5688,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Store store, CallerAction<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> callback)
         {
             if (store is null)
@@ -5694,6 +5771,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Store store, CallerAction<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?> callback)
         {
             if (store is null)
@@ -5778,6 +5856,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Store store, CallerAction<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?> callback)
         {
             if (store is null)
@@ -5864,6 +5943,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Store store, CallerAction<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, T12?> callback)
         {
             if (store is null)
@@ -5952,6 +6032,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<TResult>(Store store, CallerFunc<TResult> callback)
         {
             if (store is null)
@@ -6018,6 +6099,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T, TResult>(Store store, CallerFunc<T?, TResult> callback)
         {
             if (store is null)
@@ -6086,6 +6168,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, TResult>(Store store, CallerFunc<T1?, T2?, TResult> callback)
         {
             if (store is null)
@@ -6156,6 +6239,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, TResult>(Store store, CallerFunc<T1?, T2?, T3?, TResult> callback)
         {
             if (store is null)
@@ -6228,6 +6312,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, TResult>(Store store, CallerFunc<T1?, T2?, T3?, T4?, TResult> callback)
         {
             if (store is null)
@@ -6302,6 +6387,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, TResult>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, TResult> callback)
         {
             if (store is null)
@@ -6378,6 +6464,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, TResult>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, TResult> callback)
         {
             if (store is null)
@@ -6456,6 +6543,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, TResult>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, TResult> callback)
         {
             if (store is null)
@@ -6536,6 +6624,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, TResult> callback)
         {
             if (store is null)
@@ -6618,6 +6707,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, TResult> callback)
         {
             if (store is null)
@@ -6702,6 +6792,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, TResult> callback)
         {
             if (store is null)
@@ -6788,6 +6879,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, TResult> callback)
         {
             if (store is null)
@@ -6876,6 +6968,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, T12?, TResult> callback)
         {
             if (store is null)
@@ -6966,6 +7059,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<TResult1, TResult2>(Store store, CallerFunc<ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -7034,6 +7128,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T, TResult1, TResult2>(Store store, CallerFunc<T?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -7104,6 +7199,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, TResult1, TResult2>(Store store, CallerFunc<T1?, T2?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -7176,6 +7272,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, TResult1, TResult2>(Store store, CallerFunc<T1?, T2?, T3?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -7250,6 +7347,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, TResult1, TResult2>(Store store, CallerFunc<T1?, T2?, T3?, T4?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -7326,6 +7424,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, TResult1, TResult2>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -7404,6 +7503,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, TResult1, TResult2>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -7484,6 +7584,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, TResult1, TResult2>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -7566,6 +7667,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, TResult1, TResult2>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -7650,6 +7752,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult1, TResult2>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -7736,6 +7839,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult1, TResult2>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -7824,6 +7928,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult1, TResult2>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -7914,6 +8019,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult1, TResult2>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, T12?, ValueTuple<TResult1, TResult2>> callback)
         {
             if (store is null)
@@ -8006,6 +8112,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<TResult1, TResult2, TResult3>(Store store, CallerFunc<ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -8076,6 +8183,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T, TResult1, TResult2, TResult3>(Store store, CallerFunc<T?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -8148,6 +8256,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, TResult1, TResult2, TResult3>(Store store, CallerFunc<T1?, T2?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -8222,6 +8331,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, TResult1, TResult2, TResult3>(Store store, CallerFunc<T1?, T2?, T3?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -8298,6 +8408,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, TResult1, TResult2, TResult3>(Store store, CallerFunc<T1?, T2?, T3?, T4?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -8376,6 +8487,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, TResult1, TResult2, TResult3>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -8456,6 +8568,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, TResult1, TResult2, TResult3>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -8538,6 +8651,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, TResult1, TResult2, TResult3>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -8622,6 +8736,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, TResult1, TResult2, TResult3>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -8708,6 +8823,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult1, TResult2, TResult3>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -8796,6 +8912,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult1, TResult2, TResult3>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -8886,6 +9003,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult1, TResult2, TResult3>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -8978,6 +9096,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult1, TResult2, TResult3>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, T12?, ValueTuple<TResult1, TResult2, TResult3>> callback)
         {
             if (store is null)
@@ -9072,6 +9191,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<TResult1, TResult2, TResult3, TResult4>(Store store, CallerFunc<ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -9144,6 +9264,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T, TResult1, TResult2, TResult3, TResult4>(Store store, CallerFunc<T?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -9218,6 +9339,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, TResult1, TResult2, TResult3, TResult4>(Store store, CallerFunc<T1?, T2?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -9294,6 +9416,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, TResult1, TResult2, TResult3, TResult4>(Store store, CallerFunc<T1?, T2?, T3?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -9372,6 +9495,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, TResult1, TResult2, TResult3, TResult4>(Store store, CallerFunc<T1?, T2?, T3?, T4?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -9452,6 +9576,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, TResult1, TResult2, TResult3, TResult4>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -9534,6 +9659,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, TResult1, TResult2, TResult3, TResult4>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -9618,6 +9744,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, TResult1, TResult2, TResult3, TResult4>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -9704,6 +9831,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, TResult1, TResult2, TResult3, TResult4>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -9792,6 +9920,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult1, TResult2, TResult3, TResult4>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -9882,6 +10011,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult1, TResult2, TResult3, TResult4>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -9974,6 +10104,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult1, TResult2, TResult3, TResult4>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)
@@ -10068,6 +10199,7 @@ namespace Wasmtime
         /// </summary>
         /// <param name="store">The store to create the function in.</param>
         /// <param name="callback">The callback for when the function is invoked.</param>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public static Function FromCallback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult1, TResult2, TResult3, TResult4>(Store store, CallerFunc<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?, T10?, T11?, T12?, ValueTuple<TResult1, TResult2, TResult3, TResult4>> callback)
         {
             if (store is null)

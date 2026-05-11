@@ -246,6 +246,8 @@ namespace Wasmtime
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "IdentifierTypo")]
         internal static class Native
         {
             [StructLayout(LayoutKind.Sequential)]
@@ -282,7 +284,7 @@ namespace Wasmtime
             public static extern IntPtr wasm_tabletype_element(IntPtr type);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern Limits* wasm_tabletype_limits(IntPtr type);
+            public static extern unsafe Limits* wasm_tabletype_limits(IntPtr type);
 
             [DllImport(Engine.LibraryName)]
             public static extern void wasm_tabletype_delete(IntPtr handle);

@@ -7,8 +7,6 @@ namespace Wasmtime
     [StructLayout(LayoutKind.Sequential)]
     internal record struct ExternFunc
     {
-        static ExternFunc() => Debug.Assert(Marshal.SizeOf(typeof(ExternFunc)) == 16);
-
         public ulong store;
         public IntPtr __private;
     }
@@ -16,7 +14,10 @@ namespace Wasmtime
     [StructLayout(LayoutKind.Explicit)]
     internal record struct ExternTable
     {
-        static ExternTable() => Debug.Assert(Marshal.SizeOf(typeof(ExternTable)) == 24);
+        static ExternTable()
+        {
+            Debug.Assert(Marshal.SizeOf(typeof(ExternTable)) == 24);
+        }
 
         // Use explicit offsets because the struct in the C api has extra padding
         // due to field alignments. The total struct size is 24 bytes.
@@ -33,7 +34,10 @@ namespace Wasmtime
     [StructLayout(LayoutKind.Explicit)]
     internal record struct ExternMemory
     {
-        static ExternMemory() => Debug.Assert(Marshal.SizeOf(typeof(ExternMemory)) == 24);
+        static ExternMemory()
+        {
+            Debug.Assert(Marshal.SizeOf(typeof(ExternMemory)) == 24);
+        }
 
         // Use explicit offsets because the struct in the C api has extra padding
         // due to field alignments. The total struct size is 24 bytes.
@@ -49,8 +53,6 @@ namespace Wasmtime
     [StructLayout(LayoutKind.Sequential)]
     internal record struct ExternInstance
     {
-        static ExternInstance() => Debug.Assert(Marshal.SizeOf(typeof(ExternInstance)) == 16);
-
         public ulong store;
         public nuint __private;
     }
@@ -58,8 +60,6 @@ namespace Wasmtime
     [StructLayout(LayoutKind.Sequential)]
     internal record struct ExternGlobal
     {
-        static ExternGlobal() => Debug.Assert(Marshal.SizeOf(typeof(ExternMemory)) == 24);
-
         public ulong store;
         public uint __private1;
         public uint __private2;
@@ -78,8 +78,6 @@ namespace Wasmtime
     [StructLayout(LayoutKind.Explicit)]
     internal struct ExternUnion
     {
-        static ExternUnion() => Debug.Assert(Marshal.SizeOf(typeof(ExternUnion)) == 24);
-
         [FieldOffset(0)]
         public ExternFunc func;
 
@@ -99,8 +97,6 @@ namespace Wasmtime
     [StructLayout(LayoutKind.Sequential)]
     internal struct Extern : IDisposable
     {
-        static Extern() => Debug.Assert(Marshal.SizeOf(typeof(Extern)) == 32);
-        
         public ExternKind kind;
         public ExternUnion of;
 
@@ -112,7 +108,7 @@ namespace Wasmtime
         private static class Native
         {
             [DllImport(Engine.LibraryName)]
-            public static extern void wasmtime_extern_delete(in Extern self);
+            public static extern void wasmtime_extern_delete(in Extern val);
         }
     }
 }

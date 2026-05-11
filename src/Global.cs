@@ -249,6 +249,8 @@ namespace Wasmtime
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "IdentifierTypo")]
         internal static class Native
         {
             [DllImport(Engine.LibraryName)]

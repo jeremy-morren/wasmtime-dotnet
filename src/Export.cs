@@ -54,6 +54,8 @@ namespace Wasmtime
             return exports;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "IdentifierTypo")]
         internal static class Native
         {
             [DllImport(Engine.LibraryName)]
@@ -80,7 +82,7 @@ namespace Wasmtime
                 var name = Native.wasm_exporttype_name(exportType);
                 if (name->size == 0)
                 {
-                    Name = String.Empty;
+                    Name = string.Empty;
                 }
                 else
                 {
@@ -103,7 +105,7 @@ namespace Wasmtime
         private static class Native
         {
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern ByteArray* wasm_exporttype_name(IntPtr type);
+            public static extern unsafe ByteArray* wasm_exporttype_name(IntPtr type);
         }
     }
 
@@ -137,6 +139,8 @@ namespace Wasmtime
         /// </summary>
         public IReadOnlyList<ValueKind> Results { get; private set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "IdentifierTypo")]
         internal static class Native
         {
             [DllImport(Engine.LibraryName)]
@@ -172,6 +176,8 @@ namespace Wasmtime
         /// </summary>
         public Mutability Mutability { get; private set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "IdentifierTypo")]
         internal static class Native
         {
             [DllImport(Engine.LibraryName)]
@@ -265,6 +271,8 @@ namespace Wasmtime
         /// </summary>
         public uint Maximum { get; private set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "IdentifierTypo")]
         internal static class Native
         {
             [DllImport(Engine.LibraryName)]

@@ -214,6 +214,28 @@ namespace Wasmtime
         }
 
         /// <summary>
+        /// Sets whether or not to enable WebAssembly component model support.
+        /// </summary>
+        /// <param name="enable">True to enable WebAssembly component model support or false to disable.</param>
+        /// <returns>Returns the current config.</returns>
+        public Config WithComponentModel(bool enable)
+        {
+            Native.wasmtime_config_wasm_component_model_set(handle, enable);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets whether or not to enable asynchronous WebAssembly component model support.
+        /// </summary>
+        /// <param name="enable">True to enable asynchronous WebAssembly component model support or false to disable.</param>
+        /// <returns>Returns the current config.</returns>
+        public Config WithComponentModelAsync(bool enable)
+        {
+            Native.wasmtime_config_wasm_component_model_async_set(handle, enable);
+            return this;
+        }
+
+        /// <summary>
         /// Sets the compiler strategy to use.
         /// </summary>
         /// <param name="strategy">The compiler strategy to use.</param>
@@ -426,6 +448,12 @@ namespace Wasmtime
 
             [DllImport(Engine.LibraryName)]
             public static extern void wasmtime_config_wasm_memory64_set(Handle config, [MarshalAs(UnmanagedType.I1)] bool enable);
+
+            [DllImport(Engine.LibraryName)]
+            public static extern void wasmtime_config_wasm_component_model_set(Handle config, [MarshalAs(UnmanagedType.I1)] bool enable);
+
+            [DllImport(Engine.LibraryName)]
+            public static extern void wasmtime_config_wasm_component_model_async_set(Handle config, [MarshalAs(UnmanagedType.I1)] bool enable);
 
             [DllImport(Engine.LibraryName)]
             public static extern void wasmtime_config_strategy_set(Handle config, byte strategy);

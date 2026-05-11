@@ -44,12 +44,16 @@ namespace Wasmtime
             Maximum = maximum;
             Is64Bit = is64Bit;
             IsShared = false;
-            
-            var typeHandle = Native.wasmtime_memorytype_new((ulong)minimum, maximum is not null, (ulong)(maximum ?? 0), is64Bit, IsShared);
+
+            var error = Native.wasmtime_memorytype_new((ulong)minimum, maximum is not null, (ulong)(maximum ?? 0), is64Bit, IsShared, Native.DefaultPageSizeLog2, out var typeHandle);
+            if (error != IntPtr.Zero)
+            {
+                throw WasmtimeException.FromOwnedError(error);
+            }
+
             try
             {
-
-                var error = Native.wasmtime_memory_new(store.Context.handle, typeHandle, out this.memory);
+                error = Native.wasmtime_memory_new(store.Context.handle, typeHandle, out this.memory);
                 GC.KeepAlive(store);
 
                 if (error != IntPtr.Zero)
@@ -581,28 +585,30 @@ namespace Wasmtime
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "IdentifierTypo")]
         internal static class Native
         {
             [DllImport(Engine.LibraryName)]
-            public static extern IntPtr wasmtime_memory_new(IntPtr context, IntPtr typeHandle, out ExternMemory memory);
+            public static extern IntPtr wasmtime_memory_new(IntPtr store, IntPtr ty, out ExternMemory ret);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern byte* wasmtime_memory_data(IntPtr context, in ExternMemory memory);
+            public static extern unsafe byte* wasmtime_memory_data(IntPtr store, in ExternMemory memory);
 
             [DllImport(Engine.LibraryName)]
-            public static extern nuint wasmtime_memory_data_size(IntPtr context, in ExternMemory memory);
+            public static extern nuint wasmtime_memory_data_size(IntPtr store, in ExternMemory memory);
 
             [DllImport(Engine.LibraryName)]
-            public static extern ulong wasmtime_memory_size(IntPtr context, in ExternMemory memory);
+            public static extern ulong wasmtime_memory_size(IntPtr store, in ExternMemory memory);
 
             [DllImport(Engine.LibraryName)]
-            public static extern IntPtr wasmtime_memory_grow(IntPtr context, in ExternMemory memory, ulong delta, out ulong prev);
+            public static extern IntPtr wasmtime_memory_grow(IntPtr store, in ExternMemory memory, ulong delta, out ulong prev_size);
 
             [DllImport(Engine.LibraryName)]
-            public static extern IntPtr wasmtime_memory_type(IntPtr context, in ExternMemory memory);
+            public static extern IntPtr wasmtime_memory_type(IntPtr store, in ExternMemory memory);
 
             [DllImport(Engine.LibraryName)]
-            public static extern IntPtr wasmtime_memorytype_new(ulong min, [MarshalAs(UnmanagedType.I1)] bool max_present, ulong max, [MarshalAs(UnmanagedType.I1)] bool is_64, [MarshalAs(UnmanagedType.I1)] bool shared);
+            public static extern IntPtr wasmtime_memorytype_new(ulong min, [MarshalAs(UnmanagedType.I1)] bool max_present, ulong max, [MarshalAs(UnmanagedType.I1)] bool is_64, [MarshalAs(UnmanagedType.I1)] bool shared, byte page_size_log2, out IntPtr type);
 
             [DllImport(Engine.LibraryName)]
             public static extern ulong wasmtime_memorytype_minimum(IntPtr type);
@@ -617,6 +623,8 @@ namespace Wasmtime
 
             [DllImport(Engine.LibraryName)]
             public static extern void wasm_memorytype_delete(IntPtr handle);
+
+            public const byte DefaultPageSizeLog2 = 16;
         }
 
         private readonly Store store;

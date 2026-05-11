@@ -2,7 +2,6 @@ using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -728,6 +727,8 @@ namespace Wasmtime
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "IdentifierTypo")]
         internal static class Native
         {
             public delegate void Finalizer(IntPtr data);
@@ -737,25 +738,25 @@ namespace Wasmtime
             public unsafe delegate IntPtr WasmtimeFuncUncheckedCallback(IntPtr env, IntPtr caller, ValueRaw* args_and_results, nuint num_args_and_results);
 
             [DllImport(Engine.LibraryName)]
-            public static extern void wasmtime_func_new(IntPtr context, IntPtr type, WasmtimeFuncCallback callback, IntPtr env, Finalizer? finalizer, out ExternFunc func);
+            public static extern void wasmtime_func_new(IntPtr store, IntPtr type, WasmtimeFuncCallback callback, IntPtr env, Finalizer? finalizer, out ExternFunc ret);
 
             [DllImport(Engine.LibraryName)]
-            public static extern void wasmtime_func_new_unchecked(IntPtr context, IntPtr type, WasmtimeFuncUncheckedCallback callback, IntPtr env, Finalizer? finalizer, out ExternFunc func);
+            public static extern void wasmtime_func_new_unchecked(IntPtr store, IntPtr type, WasmtimeFuncUncheckedCallback callback, IntPtr env, Finalizer? finalizer, out ExternFunc ret);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern IntPtr wasmtime_func_call(IntPtr context, in ExternFunc func, Value* args, nuint nargs, Value* results, nuint nresults, out IntPtr trap);
+            public static extern unsafe IntPtr wasmtime_func_call(IntPtr store, in ExternFunc func, Value* args, nuint nargs, Value* results, nuint nresults, out IntPtr trap);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern IntPtr wasmtime_func_call_unchecked(IntPtr context, in ExternFunc func, ValueRaw* args_and_results, nuint args_and_results_len, out IntPtr trap);
+            public static extern unsafe IntPtr wasmtime_func_call_unchecked(IntPtr store, in ExternFunc func, ValueRaw* args_and_results, nuint args_and_results_len, out IntPtr trap);
 
             [DllImport(Engine.LibraryName)]
-            public static extern IntPtr wasmtime_func_type(IntPtr context, in ExternFunc func);
+            public static extern IntPtr wasmtime_func_type(IntPtr store, in ExternFunc func);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern void wasmtime_func_from_raw(IntPtr context, IntPtr raw, out ExternFunc func);
+            public static extern unsafe void wasmtime_func_from_raw(IntPtr context, IntPtr raw, out ExternFunc ret);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern IntPtr wasmtime_func_to_raw(IntPtr context, in ExternFunc func);
+            public static extern unsafe IntPtr wasmtime_func_to_raw(IntPtr context, in ExternFunc func);
 
             [DllImport(Engine.LibraryName)]
             public static extern IntPtr wasm_functype_new(in ValueTypeArray parameters, in ValueTypeArray results);
@@ -771,7 +772,7 @@ namespace Wasmtime
             public static extern void wasm_functype_delete(IntPtr functype);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern IntPtr wasmtime_trap_new(byte* bytes, nuint len);
+            public static extern unsafe IntPtr wasmtime_trap_new(byte* bytes, nuint len);
         }
 
         internal readonly Store? store;

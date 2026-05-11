@@ -125,10 +125,10 @@ namespace Wasmtime
         private static class Native
         {
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern ByteArray* wasm_importtype_module(IntPtr type);
+            public static extern unsafe ByteArray* wasm_importtype_module(IntPtr type);
 
             [DllImport(Engine.LibraryName)]
-            public static unsafe extern ByteArray* wasm_importtype_name(IntPtr type);
+            public static extern unsafe ByteArray* wasm_importtype_name(IntPtr type);
         }
     }
 

@@ -72,6 +72,11 @@ namespace Wasmtime
             }
         }
 
+        internal void SetWasiHttp()
+        {
+            Native.wasmtime_context_set_wasi_http(handle);
+        }
+
         /// <summary>
         /// Configures the relative deadline at which point WebAssembly code will trap.
         /// </summary>
@@ -84,22 +89,25 @@ namespace Wasmtime
         private static class Native
         {
             [DllImport(Engine.LibraryName)]
-            public static extern void wasmtime_context_gc(IntPtr handle);
+            public static extern void wasmtime_context_gc(IntPtr context);
 
             [DllImport(Engine.LibraryName)]
-            public static extern IntPtr wasmtime_context_set_fuel(IntPtr handle, ulong fuel);
+            public static extern IntPtr wasmtime_context_set_fuel(IntPtr store, ulong fuel);
 
             [DllImport(Engine.LibraryName)]
-            public static extern IntPtr wasmtime_context_get_fuel(IntPtr handle, out ulong fuel);
+            public static extern IntPtr wasmtime_context_get_fuel(IntPtr context, out ulong fuel);
 
             [DllImport(Engine.LibraryName)]
-            public static extern IntPtr wasmtime_context_set_wasi(IntPtr handle, IntPtr config);
+            public static extern IntPtr wasmtime_context_set_wasi(IntPtr context, IntPtr wasi);
 
             [DllImport(Engine.LibraryName)]
-            public static extern void wasmtime_context_set_epoch_deadline(IntPtr handle, ulong ticksBeyondCurrent);
+            public static extern void wasmtime_context_set_wasi_http(IntPtr context);
 
             [DllImport(Engine.LibraryName)]
-            public static extern IntPtr wasmtime_context_get_data(IntPtr handle);
+            public static extern void wasmtime_context_set_epoch_deadline(IntPtr context, ulong ticks_beyond_current);
+
+            [DllImport(Engine.LibraryName)]
+            public static extern IntPtr wasmtime_context_get_data(IntPtr context);
         }
 
         internal readonly IntPtr handle;
@@ -236,6 +244,18 @@ namespace Wasmtime
         public void SetWasiConfiguration(WasiConfiguration config)
         {
             Context.SetWasiConfiguration(config);
+            System.GC.KeepAlive(this);
+        }
+
+        /// <summary>
+        /// Initializes the WASI HTTP context within the store.
+        /// </summary>
+        /// <remarks>
+        /// WASI must already be configured for this store via <see cref="SetWasiConfiguration"/>.
+        /// </remarks>
+        public void SetWasiHttp()
+        {
+            Context.SetWasiHttp();
             System.GC.KeepAlive(this);
         }
 
