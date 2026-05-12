@@ -18,6 +18,7 @@
                 <TempDir>$(RustModulesTemp)%(Identity)</TempDir>
                 <CompiledWasm>$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(OutputFile).wasm</CompiledWasm>
                 <CompiledWat>$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(OutputFile).wat</CompiledWat>
+                <CompiledWit>$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(OutputFile).wit</CompiledWit>
                 <OutputLink>RustModules/%(OutputFile)</OutputLink>
             </_RustModuleSource>
         </ItemGroup>
@@ -56,14 +57,10 @@
             Inputs="@(_RustModuleSource->'%(CompiledWasm)')"
             Outputs="@(_RustModuleSource->'%(CompiledWat)')">
 
-        <PropertyGroup>
-            <_WasmToolsArgs>print --color never --print-offsets</_WasmToolsArgs>
-        </PropertyGroup>
-
         <Message Importance="low"
                  Text="Converting Rust module wasm to wat: %(_RustModuleSource.CompiledWasm) to %(_RustModuleSource.CompiledWat)" />
 
-        <Exec Command="wasm-tools $(_WasmToolsArgs) &quot;%(_RustModuleSource.CompiledWasm)&quot; --output &quot;%(_RustModuleSource.CompiledWat)&quot;"
+        <Exec Command="wasm-tools print --color never --print-offsets &quot;%(_RustModuleSource.CompiledWasm)&quot; --output &quot;%(_RustModuleSource.CompiledWat)&quot;"
               ConsoleToMSBuild="true"
               StandardOutputImportance="low" />
 
@@ -71,9 +68,26 @@
                Text="Expected Rust module output was not produced: %(_RustModuleSource.CompiledWat)" />
     </Target>
 
+    <Target Name="GetRustModulesWit"
+             BeforeTargets="Build"
+             DependsOnTargets="BuildRustModules"
+             Inputs="@(_RustModuleSource->'%(CompiledWasm)')"
+             Outputs="@(_RustModuleSource->'%(CompiledWit)')">
+
+        <Message Importance="low"
+                 Text="Converting Rust module wasm to wit: %(_RustModuleSource.CompiledWasm) to %(_RustModuleSource.CompiledWit)" />
+
+        <Exec Command="wasm-tools component wit --color never &quot;%(_RustModuleSource.CompiledWasm)&quot; --output &quot;%(_RustModuleSource.CompiledWit)&quot;"
+              ConsoleToMSBuild="true"
+              StandardOutputImportance="low" />
+
+        <Error Condition="!Exists('%(_RustModuleSource.CompiledWit)')"
+               Text="Expected Rust module output was not produced: %(_RustModuleSource.CompiledWit)" />
+    </Target>
+
     <!-- Copy the compiled wasm and wat files as content -->
     <Target Name="IncludeRustModulesAsContent"
-            DependsOnTargets="ResolveRustModules;BuildRustModules;ConvertRustModulesWasmToWat"
+            DependsOnTargets="ResolveRustModules;BuildRustModules;ConvertRustModulesWasmToWat;GetRustModulesWit"
             BeforeTargets="GetCopyToOutputDirectoryItems"
             Condition="'$(TargetFramework)' != ''">
 
@@ -85,6 +99,11 @@
                         
             <ContentWithTargetPath Include="%(_RustModuleSource.CompiledWat)"
                                    TargetPath="%(_RustModuleSource.OutputLink).wat"
+                                   CopyToOutputDirectory="Always"
+                                   Visible="false" />
+
+            <ContentWithTargetPath Include="%(_RustModuleSource.CompiledWit)"
+                                   TargetPath="%(_RustModuleSource.OutputLink).wit"
                                    CopyToOutputDirectory="Always"
                                    Visible="false" />
         </ItemGroup>

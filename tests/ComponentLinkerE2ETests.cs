@@ -5,8 +5,10 @@ namespace Wasmtime.Tests;
 
 public class ComponentLinkerE2ETests
 {
-    [Fact]
-    public void ItAllowsCoreWasmP2Components()
+    [Theory]
+    [InlineData("wasm-bytes")]
+    [InlineData("wat-string")]
+    public void ItAllowsCoreWasmP2Components(string loadPath)
     {
         using var tempDir = new TempDirectory();
         File.WriteAllText(Path.Combine(tempDir.Path, "alpha.txt"), "alpha");
@@ -30,8 +32,7 @@ public class ComponentLinkerE2ETests
                 WasiDirectoryPermissions.Read,
                 WasiFilePermissions.Read));
 
-        var cliComponent = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RustModules/cli_echo.wasm");
-        using var component = Component.FromBytes(engine, File.ReadAllBytes(cliComponent));
+        using var component = LoadCliEchoComponent(engine, loadPath);
         using var api = component.GetExport("wasmtime:cli-echo/api");
         var instance = linker.Instantiate(store, component);
 
@@ -121,6 +122,25 @@ public class ComponentLinkerE2ETests
             var address = value.AsString();
             address.StartsWith("error:", StringComparison.Ordinal).Should().BeFalse();
             IPAddress.TryParse(address, out _).Should().BeTrue();
+        }
+    }
+
+    private static Component LoadCliEchoComponent(Engine engine, string loadPath)
+    {
+        var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        var wasmPath = Path.Combine(baseDirectory, "RustModules/cli_echo.wasm");
+        var watPath = Path.Combine(baseDirectory, "RustModules/cli_echo.wat");
+
+        switch (loadPath)
+        {
+            case "wasm-bytes":
+                return Component.FromBytes(engine, File.ReadAllBytes(wasmPath));
+
+            case "wat-string":
+                return Component.FromText(engine, "cli_echo", File.ReadAllText(watPath));
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(loadPath), loadPath, "Unknown component load path.");
         }
     }
 }

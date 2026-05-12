@@ -168,6 +168,7 @@ The .NET embedding of Wasmtime enables .NET code to instantiate WebAssembly modu
       <FileExtension>zip</FileExtension>
       <LibraryFilename>wasmtime.dll</LibraryFilename>
     </Wasmtime>
+
   </ItemGroup>
 
   <!-- This target downloads wasmtime and runs before any inner TFM-specific builds -->
@@ -186,7 +187,7 @@ The .NET embedding of Wasmtime enables .NET code to instantiate WebAssembly modu
     </ItemGroup>
   </Target>
 
-   <Target Name="CopyWasmtimeLibrary" BeforeTargets="BeforeBuild">
+  <Target Name="CopyWasmtimeLibrary" BeforeTargets="BeforeBuild">
     <ItemGroup>
       <Content Condition="'%(Wasmtime.Copy)'=='true'" Include="$(BaseIntermediateOutputPath)$(ReleaseFileNameBase)-%(Wasmtime.Arch)-%(Wasmtime.OS)-c-api/lib/%(Wasmtime.LibraryFilename)">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
