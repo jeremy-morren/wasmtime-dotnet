@@ -55,7 +55,8 @@
   <Import Project="RustModules/BuildRustModules.targets" />
 
   <ItemGroup>
-    <RustModule Include="CliEcho" OutputFile="cli_echo"/>
-    <RustModule Include="HttpRequest" OutputFile="http_request"/>
+    <RustModule Include="CliEcho" Name="cli_echo"/>
+    <RustModule Include="HttpRequest" Name="http_request"/>
+    <RustModule Include="WaitAsync" Name="wait_async"/>
   </ItemGroup>
 </Project>

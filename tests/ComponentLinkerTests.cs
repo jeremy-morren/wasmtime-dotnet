@@ -42,9 +42,7 @@ namespace Wasmtime.Tests
         {
             using var config = new Config();
 
-            config
-                .WithComponentModel(true)
-                .WithComponentModelAsync(false);
+            config.WithComponentModel(true);
         }
 
         [Fact]

@@ -14,12 +14,13 @@
         <ItemGroup>
             <_RustModuleSource Include="@(RustModule)">
                 <SourceDir>$(RustModulesSrc)%(Identity)\</SourceDir>
+                <SourcePath>$(RustModulesSrc)%(Identity)\%(Name).rs</SourcePath>
                 <ManifestPath>$(RustModulesSrc)%(Identity)\Cargo.toml</ManifestPath>
                 <TempDir>$(RustModulesTemp)%(Identity)</TempDir>
-                <CompiledWasm>$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(OutputFile).wasm</CompiledWasm>
-                <CompiledWat>$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(OutputFile).wat</CompiledWat>
-                <CompiledWit>$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(OutputFile).wit</CompiledWit>
-                <OutputLink>RustModules/%(OutputFile)</OutputLink>
+                <CompiledWasm>$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(Name).wasm</CompiledWasm>
+                <CompiledWat>$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(Name).wat</CompiledWat>
+                <CompiledWit>$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(Name).wit</CompiledWit>
+                <OutputLink>RustModules/%(Name)</OutputLink>
             </_RustModuleSource>
         </ItemGroup>
     </Target>
@@ -27,7 +28,7 @@
     <Target Name="BuildRustModules"
             BeforeTargets="Build"
             DependsOnTargets="ResolveRustModules"
-            Inputs="@(_RustModuleSource->'%(ManifestPath)')"
+            Inputs="@(_RustModuleSource->'%(SourcePath)')"
             Outputs="@(_RustModuleSource->'%(CompiledWasm)')">
 
         <PropertyGroup>

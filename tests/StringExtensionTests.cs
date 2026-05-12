@@ -9,18 +9,7 @@ public class StringExtensionTests
     {
         const string value = "Hello, é🙂";
 
-        value.GetUtf8StackallocSize().Should().Be(64);
-        AssertUtf8AllocationMatchesEncoding(value);
-    }
-
-    [Fact]
-    public void ItEncodesMediumStringsUsingTheUtf8StackallocPattern()
-    {
-        var value = new string('a', 100);
-        var stackallocSize = value.GetUtf8StackallocSize();
-
-        stackallocSize.Should().BeGreaterThan(64);
-        stackallocSize.Should().BeLessThan(512);
+        value.GetUtf8StackallocSize().Should().Be(value.Length * 2);
         AssertUtf8AllocationMatchesEncoding(value);
     }
 

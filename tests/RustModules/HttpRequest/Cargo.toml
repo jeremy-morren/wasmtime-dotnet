@@ -11,6 +11,6 @@ url = "2.5.7"
 wasi = "=0.13.1"
 
 [lib]
-path = "http-request.rs"
+path = "http_request.rs"
 crate-type = ["cdylib"]
 

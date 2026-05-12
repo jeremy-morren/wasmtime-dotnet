@@ -1,13 +1,11 @@
 [package]
-name = "cli_echo"
+name = "wait_async"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
 wit-bindgen = "0.57.1"
-wasi = "=0.13.1"
 
 [lib]
-path = "cli_echo.rs"
+path = "wait_async.rs"
 crate-type = ["cdylib"]
-
