@@ -55,6 +55,7 @@
   <Import Project="RustModules/BuildRustModules.targets" />
 
   <ItemGroup>
-    <RustModule Include="CliEcho" OutputFile="cli_echo.wasm"/>
+    <RustModule Include="CliEcho" OutputFile="cli_echo"/>
+    <RustModule Include="HttpRequest" OutputFile="http_request"/>
   </ItemGroup>
 </Project>

@@ -13,10 +13,11 @@
 
         <ItemGroup>
             <_RustModuleSource Include="@(RustModule)">
-                <SourceDir>$(RustModulesSrc)%(Identity))</SourceDir>
+                <SourceDir>$(RustModulesSrc)%(Identity)\</SourceDir>
                 <ManifestPath>$(RustModulesSrc)%(Identity)\Cargo.toml</ManifestPath>
                 <TempDir>$(RustModulesTemp)%(Identity)</TempDir>
-                <Compiled>$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(OutputFile)</Compiled>
+                <CompiledWasm>$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(OutputFile).wasm</CompiledWasm>
+                <CompiledWat>$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(OutputFile).wat</CompiledWat>
                 <OutputLink>RustModules/%(OutputFile)</OutputLink>
             </_RustModuleSource>
         </ItemGroup>
@@ -25,9 +26,8 @@
     <Target Name="BuildRustModules"
             BeforeTargets="Build"
             DependsOnTargets="ResolveRustModules"
-            Inputs="@(RustModule->'$(RustModulesSrc)%(Identity)\Cargo.toml')"
-            Outputs="@(RustModule->'$(RustModulesTemp)%(Identity)\wasm32-wasip2\release\%(OutputFile)')"
-            Condition="'@(RustModule)' != ''">
+            Inputs="@(_RustModuleSource->'%(ManifestPath)')"
+            Outputs="@(_RustModuleSource->'%(CompiledWasm)')">
 
         <PropertyGroup>
             <_CargoArgs>--target wasm32-wasip2 --release --lib --quiet</_CargoArgs>
@@ -36,26 +36,55 @@
         <Message Importance="low"
                  Text="Building Rust module: %(_RustModuleSource.SourceDir). TempDir: %(_RustModuleSource.TempDir)" />
 
+        <!-- Delete target directory in source if it exists -->
+        <RemoveDir Directories="%(_RustModuleSource.SourceDir)target" Condition="Exists('%(_RustModuleSource.SourceDir)target')" />
+
         <MakeDir Directories="%(_RustModuleSource.TempDir)" />
 
         <Exec Command="cargo build $(_CargoArgs) --manifest-path &quot;%(_RustModuleSource.ManifestPath)&quot; --target-dir &quot;%(_RustModuleSource.TempDir)&quot;"
               WorkingDirectory="%(_RustModuleSource.TempDir)"
               ConsoleToMSBuild="true"
-              UseUtf8Encoding="true"
               StandardOutputImportance="low" />
 
-        <Error Condition="!Exists('%(_RustModuleSource.Compiled)')"
-               Text="Expected Rust module output was not produced: %(_RustModuleSource.Compiled)" />
+        <Error Condition="!Exists('%(_RustModuleSource.CompiledWasm)')"
+               Text="Expected Rust module output was not produced: %(_RustModuleSource.CompiledWasm)" />
     </Target>
 
+    <Target Name="ConvertRustModulesWasmToWat"
+            BeforeTargets="Build"
+            DependsOnTargets="BuildRustModules"
+            Inputs="@(_RustModuleSource->'%(CompiledWasm)')"
+            Outputs="@(_RustModuleSource->'%(CompiledWat)')">
+
+        <PropertyGroup>
+            <_WasmToolsArgs>print --color never --print-offsets</_WasmToolsArgs>
+        </PropertyGroup>
+
+        <Message Importance="low"
+                 Text="Converting Rust module wasm to wat: %(_RustModuleSource.CompiledWasm) to %(_RustModuleSource.CompiledWat)" />
+
+        <Exec Command="wasm-tools $(_WasmToolsArgs) &quot;%(_RustModuleSource.CompiledWasm)&quot; --output &quot;%(_RustModuleSource.CompiledWat)&quot;"
+              ConsoleToMSBuild="true"
+              StandardOutputImportance="low" />
+
+        <Error Condition="!Exists('%(_RustModuleSource.CompiledWat)')"
+               Text="Expected Rust module output was not produced: %(_RustModuleSource.CompiledWat)" />
+    </Target>
+
+    <!-- Copy the compiled wasm and wat files as content -->
     <Target Name="IncludeRustModulesAsContent"
-            DependsOnTargets="ResolveRustModules;BuildRustModules"
+            DependsOnTargets="ResolveRustModules;BuildRustModules;ConvertRustModulesWasmToWat"
             BeforeTargets="GetCopyToOutputDirectoryItems"
             Condition="'$(TargetFramework)' != ''">
 
         <ItemGroup>
-            <ContentWithTargetPath Include="%(_RustModuleSource.Compiled)"
-                                   TargetPath="%(_RustModuleSource.OutputLink)"
+            <ContentWithTargetPath Include="%(_RustModuleSource.CompiledWasm)"
+                                   TargetPath="%(_RustModuleSource.OutputLink).wasm"
+                                   CopyToOutputDirectory="Always"
+                                   Visible="false" />
+                        
+            <ContentWithTargetPath Include="%(_RustModuleSource.CompiledWat)"
+                                   TargetPath="%(_RustModuleSource.OutputLink).wat"
                                    CopyToOutputDirectory="Always"
                                    Visible="false" />
         </ItemGroup>
